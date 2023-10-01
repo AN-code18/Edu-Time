@@ -1,0 +1,16 @@
+cron job
+job scheduling -> deletion ki process ko schedule krne k liye
+webhook
+
+// to chek authenticity and integrity
+hmac--> use 2 chiz(hashing algorithm , secret key)
+hsha --> hashing function to convert data in encrypted format
+/////--------->
+jb koi hashing algorithm ko run krte h kisi text/input k upar aur joh output aata h usko bht sare cases k andr ex special term  
+se bolte h "DIGEST"  --> hexadecimal k format k andr hota h
+
+checksum
+
+//////////
+video 6 - 7 bacha h 
+frontend start kr rhe h ab
