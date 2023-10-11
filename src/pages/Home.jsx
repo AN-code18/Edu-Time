@@ -8,6 +8,7 @@ import CodeBlocks from "../components/core/HomePage/CodeBlocks";
 import TimelineSection from "../components/core/HomePage/TimelineSection";
 import LearningLanguageSection from "../components/core/HomePage/LearningLanguageSection";
 import InstructorSection from "../components/core/HomePage/InstructorSection";
+import ExploreMore from "../components/core/HomePage/ExploreMore";
 import Footer from "../components/common/Footer";
 
 function Home() {
@@ -17,9 +18,9 @@ function Home() {
       <div className="relative mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between gap-8">
         <Link to={"/signup"}>
           <div
-            className=" group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 
-      transition-all duration-200 hover:scale-95 w-fit p-1 hover:drop-shadow-none  drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]"
-          >
+            className="group mx-auto mt-16 w-fit rounded-full bg-richblack-800 p-1 
+            font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 hover:drop-shadow-none"
+            >
             <div className="flex flex-row items-center gap-2 rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900">
               <p>Become an Instructor</p>
               <FaArrowRight />
@@ -48,7 +49,7 @@ function Home() {
           </CTAButton>
         </div>
 
-        <div className="mx-3 my-12 shadow-blue-200 shadow-[10px_-5px_50px_-5px]">
+        <div className="mx-3 my-7 shadow-blue-200 shadow-[10px_-5px_50px_-5px]">
           <video
             className="shadow-[20px_20px_rgba(255,255,255)]"
             muted
@@ -166,8 +167,7 @@ function Home() {
       {/*section 3 */}
 
       <div
-        className="w-11/12 mx-auto max-w-maxContent flex-col items-center justify-between
-       first-letter bg-richblack-900 text-white"
+        className="relative mx-auto my-20 flex w-11/12 max-w-maxContent flex-col items-center justify-between gap-8 bg-richblack-900 text-white"
       >
         <InstructorSection />
         <h2 className="text-center text-4xl font-semibold mt-10">
