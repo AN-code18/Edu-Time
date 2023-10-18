@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const user = require("../models/User");
+const User = require("../models/User");
 
 //auth --> check authentication by verfying jsonwebtoken
 //jsonwebtoken send kiya h woh sahi h ya nahi --> token mil gya toh sahi h else glt h
@@ -8,24 +9,24 @@ const user = require("../models/User");
 
 exports.auth = async (req, res, next) => {
   try {
-    //extract token
+    //extract JWT token from request cookies, body or header
     const token =
       req.cookies.token ||
       req.body.token ||
       req.header("Authorisation").replace("Bearer ", "");
 
-    //if token is missing , tehn return response
+    //if token is missing , then return 401 Unauthorized response
     if (!token) {
       return res.status(401).json({
         success: false,
-        message: "Token is missing",
+        message: "Token  Missing",
       });
     }
-    //verify token
+    // Verifying the JWT using the secret key stored in environment variables
     try {
       const decode = jwt.verify(token, process.env.JWT_SECRET);
-      console.llog(decode);
-      // joh bhi request k andr user object h uske andt yeh decode daal do  [req m role ki value added h  --> kyu ki authentication k time payload m role bhi added h payload h  and here we are adding decode toh decodem payload  bhi  h]
+      console.log(decode);
+      // joh bhi request k andr user object h uske andr yeh decode daal do  [req m role ki value added h  --> kyu ki authentication k time payload m role bhi added h payload h  and here we are adding decode toh decodem payload  bhi  h]
       req.user = decode;
     } catch (err) {
       //verification isssue
@@ -38,7 +39,7 @@ exports.auth = async (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       success: false,
-      message: "Something went wront while validating the token",
+      message: "Something went wrong while validating the token",
     });
   }
 };
@@ -47,17 +48,19 @@ exports.auth = async (req, res, next) => {
 // 1 -> req k andr role added h usse verify kr lo
 exports.isStudent = async (req, res, next) => {
   try {
-    if (req.user.accountType !== "Student") {
+    const userDetails = await User.findOne({ email: req.user.email });
+
+    if (userDetails.accountType !== "Student") {
       return res.status(401).json({
         success: false,
-        message: "This is protected route for Student only! ",
+        message: "This is protected route for Students only! ",
       });
     }
     next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified , please try again ",
+      message: "User role can't be Verified , please try again ",
     });
   }
 };
@@ -66,17 +69,22 @@ exports.isStudent = async (req, res, next) => {
 
 exports.isInstructor = async (req, res, next) => {
   try {
-    if (req.user.accountType !== "Instructor") {
+    const userDetails = await User.findOne({ email: req.user.email });
+    console.log(userDetails);
+
+    console.log(userDetails.accountType);
+
+    if (userDetails.accountType !== "Instructor") {
       return res.status(401).json({
         success: false,
-        message: "This is protected route for Instructor only! ",
+        message: "This is a Protected Route for Instructor",
       });
     }
     next();
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified , please try again ",
+      message: "User role Can't be Verified , please try again ",
     });
   }
 };
@@ -94,7 +102,7 @@ exports.isAdmin = async (req, res, next) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "User role cannot be verified , please try again ",
+      message: "User role Can't be Verified, please try again ",
     });
   }
 };
