@@ -1,8 +1,9 @@
 const { instance } = require("../config/razorpay");
 const Course = require("../models/Course");
 const User = require("../models/User");
+const crypto = require("crypto")
 const mailSender = require("../utils/mailSender");
-const { courseEnrollmentEmail } = require("../mail/courseEnrollmentEmail");
+const { courseEnrollmentEmail } = require("../mail/templates/courseEnrollmentEmail");
 const mongoose = require("mongoose");
 
 //capture the payment and initiate the Rajorpay order

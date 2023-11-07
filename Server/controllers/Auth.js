@@ -42,8 +42,6 @@ exports.sendOTP = async (req, res) => {
     while (result) {
       otp = otpGenerator(6, {
         upperCaseAlphabets: false,
-        lowerCaseAlphabets: false,
-        specialChars: false,
       });
     }
 
@@ -51,19 +49,20 @@ exports.sendOTP = async (req, res) => {
 
     //create an entry for OTP in DB
     const otpBody = await OTP.create(otpPayload);
-    console.log(otpBody);
+    console.log("OTP BODY", otpBody);
 
     //return response successfull
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "OTP Sent Successfully",
       otp,
     });
   } catch (error) {
     console.log(error);
-    return es.status(200).json({
+    return res.status(500).json({
       success: false,
-      message: error.message,
+      error: error.message,
+      message: "Error occured while sending OTP",
     });
   }
 };
@@ -119,6 +118,8 @@ exports.signUP = async (req, res) => {
       .sort({ createdAt: -1 })
       .limit(1);
 
+      console.log(recentOtp);
+
     //validate OTP
     if (recentOtp.length == 0) {
       //OTP not found for the email
@@ -126,7 +127,7 @@ exports.signUP = async (req, res) => {
         success: false,
         message: "OTP not found",
       });
-    } else if (otp != recentOtp) {
+    } else if (otp != recentOtp[0].otp) {
       return res.status(400).json({
         success: false,
         message: "Invalid OTP",
@@ -170,6 +171,7 @@ exports.signUP = async (req, res) => {
     console.log(error);
     return res.status(500).json({
       success: false,
+      error:error.message,
       message: "User cannot be registered, please try again",
     });
   }
@@ -207,7 +209,7 @@ exports.login = async (req, res) => {
         accountType: user.accountType,
       };
       const token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "3h",
+        expiresIn: "24h",
       });
 
       user.token = token;

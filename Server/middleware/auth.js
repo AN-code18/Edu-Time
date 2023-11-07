@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const user = require("../models/User");
+const dotenv = require("dotenv");
 const User = require("../models/User");
+
+dotenv.config();
 
 //auth --> check authentication by verfying jsonwebtoken
 //jsonwebtoken send kiya h woh sahi h ya nahi --> token mil gya toh sahi h else glt h
@@ -13,7 +14,7 @@ exports.auth = async (req, res, next) => {
     const token =
       req.cookies.token ||
       req.body.token ||
-      req.header("Authorisation").replace("Bearer ", "");
+      req.header("Authorization").replace("Bearer ", "");
 
     //if token is missing , then return 401 Unauthorized response
     if (!token) {
@@ -92,17 +93,18 @@ exports.isInstructor = async (req, res, next) => {
 //isAdmin
 exports.isAdmin = async (req, res, next) => {
   try {
-    if (req.user.accountType !== "isAdmin") {
-      return res.status(401).json({
-        success: false,
-        message: "This is protected route for isAdmin only! ",
-      });
-    }
-    next();
-  } catch (error) {
-    return res.status(500).json({
-      success: false,
-      message: "User role Can't be Verified, please try again ",
-    });
-  }
+		const userDetails = await User.findOne({ email: req.user.email });
+
+		if (userDetails.accountType !== "Admin") {
+			return res.status(401).json({
+				success: false,
+				message: "This is a Protected Route for Admin",
+			});
+		}
+		next();
+	} catch (error) {
+		return res
+			.status(500)
+			.json({ success: false, message: `User Role Can't be Verified` });
+	}
 };

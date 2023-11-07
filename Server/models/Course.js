@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const coursesSchema = new mongoose.Schema({
-  couseName: {
+  courseName: {
     type: String,
   },
   courseDescription: {
@@ -33,9 +33,9 @@ const coursesSchema = new mongoose.Schema({
   thumbnail: {
     type: String,
   },
-  tag:{
-    type:[String],
-    required:true,
+  tag: {
+    type: [String],
+    required: true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -48,12 +48,12 @@ const coursesSchema = new mongoose.Schema({
       ref: "User",
     },
   ],
-  instructions:{
-    type:[String],
+  instructions: {
+    type: [String],
   },
-  status:{
-    type:String,
-    enum:["Draft" , "Published"],
+  status: {
+    type: String,
+    enum: ["Draft", "Published"],
   },
 });
 
