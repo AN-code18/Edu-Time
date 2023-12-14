@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Course = require("../models/Course");
 const CourseProgress = require("../models/CourseProgress");
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
+const { convertSecondsToDuration } = require("../utils/secToDuration")
 
 exports.updateProfile = async (req, res) => {
   try {
@@ -162,7 +163,7 @@ exports.updateDisplayPicture = async (req, res) => {
 };
 
 /////////////////////*************************///////////////////
-/*exports.getEnrolledCourse = async (req, res) => {
+exports.getEnrolledCourse = async (req, res) => {
   try {
     const userId = req.user.id;
     let userDetails = await User.findOne({
@@ -180,11 +181,10 @@ exports.updateDisplayPicture = async (req, res) => {
       .exec();
 
     userDetails = userDetails.toObject();
-
-    var SubSectionlength = 0;
+    var Subsectionlength = 0;
     for (var i = 0; i < userDetails.courses.length; i++) {
-      let totalDurationInSeconds = 0;
-      SubSectionlength = 0;
+      let totalDurationInSeconds = 0
+      let SubsectionLength = 0;
 
       for (var j = 0; j < userDetails.courses[i].courseContent.length; j++) {
         totalDurationInSeconds += userDetails.courses[i].courseContent[
@@ -257,4 +257,4 @@ exports.instructorDashboard = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
-};*/
+};

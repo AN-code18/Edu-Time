@@ -12,7 +12,7 @@ export const pageAndComponentData = async (categoryId) => {
   try {
     const response = await apiConnector(
       "POST",
-      catalogData.CATALOPAGEGDATA_API,
+      catalogData.CATALOGPAGEGDATA_API,
       { categoryId: categoryId }
     );
 

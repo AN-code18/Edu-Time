@@ -7,46 +7,56 @@ import Quote from "../components/core/AboutPage/Quote";
 import FoundingStory from "../assets/Images/FoundingStory.png";
 import StatsComponent from "../components/core/AboutPage/StatsComponent";
 import LearningGrid from "../components/core/AboutPage/LearningGrid";
+import ContactFormSection from "../components/core/AboutPage/ContactFormSection";
+import Footer from "../components/common/Footer";
 
 const About = () => {
   return (
-    <div className="mt-[100px] text-white">
+    <div>
       {/**section -1 */}
-      <section>
-        <div>
-          <header>
+      <section className="bg-richblack-700">
+        <div className="relative mx-auto flex w-11/12 max-w-maxContent flex-col 
+        justify-between gap-10 text-center text-white">
+          <header className="mx-auto py-20 text-4xl font-semibold lg:w-[70%]">
             Driving Innovation in Online Education for a
-            <HighLightText text={"Brighter Text"} />
-            <p>
+            <HighLightText text={"Brighter Future"} />
+            <p className="mx-auto mt-3 text-center text-base font-medium text-richblack-300 lg:w-[95%]">
               Studynotion is at the forefront of driving innovation in online
               education. We're passionate about creating a brighter future by
               offering cutting-edge courses, leveraging emerging technologies,
               and nurturing a vibrant learning community.
             </p>
           </header>
-          <div className="flex gap-x-3 mt-auto">
-            <img src={BannerImage1} />
-            <img src={BannerImage2} />
-            <img src={BannerImage3} />
+          <div className="sm:h-[70px] lg:h-[150px]"></div>
+          <div
+            className="absolute bottom-0 left-[50%] grid w-[100%] 
+          translate-x-[-50%] translate-y-[30%] grid-cols-3 gap-3 lg:gap-5"
+          >
+            <img src={BannerImage1} alt="" />
+            <img src={BannerImage2} alt="" />
+            <img src={BannerImage3} alt="" />
           </div>
         </div>
       </section>
 
       {/**section 2 */}
-      <section>
-        <div>
+      <section className="border-b border-richblack-700">
+        <div className="mx-auto  flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-richblack-500">
+          <div className="h-[100px]"></div>
           <Quote />
         </div>
       </section>
 
       {/** section 3 */}
       <section>
-        <div>
+        <div className="mx-auto flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-richblack-500">
           {/** founding story ka pura div */}
-          <div>
+          <div className="flex flex-col items-center gap-10 lg:flex-row justify-between">
             {/**Founding story left box */}
-            <div>
-              <h1>Our Founding Story</h1>
+            <div className="my-24 flex flex-col gap-10  lg:w-[50%]">
+              <h1 className="bg-gradient-to-br from-[#833AB4] via-[#FD1D1D] to-[#FCB045] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
+                Our Founding Story
+              </h1>
               <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
                 Our e-learning platform was born out of a shared vision and
                 passion for transforming education. It all began with a group of
@@ -66,15 +76,21 @@ const About = () => {
             </div>
             {/** founding story right box */}
             <div>
-              <img src={FoundingStory} />
+              <img
+                src={FoundingStory}
+                alt=""
+                className="shadow-[0_0_20px_0] shadow-[#FC6767]"
+              />
             </div>
           </div>
 
           {/** vision and mission wala parent div */}
-          <div>
+          <div className="flex flex-col items-center lg:gap-10 lg:flex-row justify-between">
             {/*left box*/}
-            <div>
-              <h1>Our Vision</h1>
+            <div className="my-24 flex flex-col gap-10 lg:w-[40%]">
+              <h1 className="bg-gradient-to-b from-[#FF512F] to-[#F09819] bg-clip-text text-4xl font-semibold text-transparent lg:w-[70%] ">
+                Our Vision
+              </h1>
               <p className="text-base font-medium text-richblack-300 lg:w-[95%]">
                 With this vision in mind, we set out on a journey to create an
                 e-learning platform that would revolutionize the way people
@@ -107,9 +123,21 @@ const About = () => {
       <StatsComponent />
 
       {/**section 5 */}
-      <section>
+      <section className="mx-auto mt-20 flex w-11/12 max-w-maxContent flex-col justify-between gap-10 text-white">
         <LearningGrid />
+        <ContactFormSection />
       </section>
+      <div
+        className="relative mx-auto my-20 flex w-11/12 max-w-maxContent 
+      flex-col items-center justify-between gap-8 bg-richblack-900 text-white"
+      >
+        {/* Reviws from Other Learner */}
+        <h1 className="text-center text-4xl font-semibold mt-8">
+          Reviews from other learners
+        </h1>
+        {/* <ReviewSlider /> */}
+      </div>
+      <Footer />
     </div>
   );
 };
